@@ -21,36 +21,31 @@ Datos del cliente
 Nombre:           {self.nombre}.
 Apellido:         {self.apellido}.
 N° cuenta:        {self.numero_cuenta}.
-Dinero en cuenta: {self.balance}."""
+Dinero en cuenta: {self.balance}.\n"""
 
     # para realizar un deposito
     def depositar(self):
         deposito = int(input("Cuanto dinero quieres depositar?: "))
-        self.balance = self.balance + deposito
-        print (f"""
-Has depositado ${deposito} pesos
-Tu dinero actual es de ${self.balance} pesos\n""")
+        self.balance += deposito
+        print (f"\nHas depositado ${deposito} pesos")
 
     # para retirar dinero
     def retirar(self):
         retiro = int(input("Cuanto dinero deseas retirar?: "))
-        self.balance = self.balance - retiro
-        print (f"""
-Has retirado ${retiro} pesos
-Tu dinero actual es de ${self.balance} pesos\n""")
+        self.balance -= retiro
+        print (f"\nHas retirado ${retiro} pesos")
 
-    # para finalizar el programa
-    def finalizar_programa(self):
-        print(f"Hasta pronto {self.nombre}!")
-
-
-    # Funcion que creara un nuevo cliente al ejecutar el programa
+# Funcion que creara un nuevo cliente al ejecutar el programa
 def crear_cliente():
     nombre = input("Ingresa tu nombre: ")
     apellido = input("Ingresa tu apellido: ")
     numero_cuenta = int(input("Ingresa tu N° de cuenta: "))
     nuevo_cliente = Cliente(nombre, apellido, numero_cuenta)
     return nuevo_cliente
+
+# para finalizar el programa
+def finalizar_programa(cliente):
+    print(f"Hasta pronto {cliente.nombre}!")
 
 def inicio():
     cliente = crear_cliente()
@@ -60,25 +55,23 @@ Bienvenido {cliente.nombre} {cliente.apellido}\n
 Elige una opcion:
 [1]: Ver datos
 [2]: Depositar dinero
-[3]: Retirar dinero
-[4]: Salir
+[3]: Retirar dinero\n
 Tu respuesta: """))
 
         if accion == 1:
             print(cliente.imprimir_datos())
         elif accion == 2:
             cliente.depositar()
+            print(f"Saldo actual: ${cliente.balance} pesos\n")
         elif accion == 3:
             cliente.retirar()
-        elif accion == 4:
-            cliente.finalizar_programa()
-            break
+            print(f"Saldo actual: ${cliente.balance} pesos\n")
         else:
             print("Opción no válida. Por favor, elige una opción válida.")
 
         continuar = input("¿Quieres realizar otra acción? (S/N): ")
         if continuar.lower() != 's':
-            cliente.finalizar_programa()
+            finalizar_programa(cliente)
             break
 
 inicio()
