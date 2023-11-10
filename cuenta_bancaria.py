@@ -26,18 +26,18 @@ Dinero en cuenta: {self.balance}."""
     # para realizar un deposito
     def depositar(self):
         deposito = int(input("Cuanto dinero quieres depositar?: "))
-        total = self.balance + deposito
+        self.balance = self.balance + deposito
         print (f"""
 Has depositado ${deposito} pesos
-Tu dinero actual es de ${total} pesos""")
+Tu dinero actual es de ${self.balance} pesos\n""")
 
     # para retirar dinero
     def retirar(self):
         retiro = int(input("Cuanto dinero deseas retirar?: "))
-        total = self.balance - retiro
+        self.balance = self.balance - retiro
         print (f"""
 Has retirado ${retiro} pesos
-Tu dinero actual es de ${total} pesos""")
+Tu dinero actual es de ${self.balance} pesos\n""")
 
     # para finalizar el programa
     def finalizar_programa(self):
@@ -56,14 +56,14 @@ def inicio():
     cliente = crear_cliente()
     while True:
         accion = int(input(f"""
-Bienvenido {cliente.nombre} {cliente.apellido}
+Bienvenido {cliente.nombre} {cliente.apellido}\n
 Elige una opcion:
 [1]: Ver datos
 [2]: Depositar dinero
 [3]: Retirar dinero
-[4]: Finalizar Programa
+[4]: Salir
 Tu respuesta: """))
-    
+
         if accion == 1:
             print(cliente.imprimir_datos())
         elif accion == 2:
@@ -75,5 +75,10 @@ Tu respuesta: """))
             break
         else:
             print("Opción no válida. Por favor, elige una opción válida.")
+
+        continuar = input("¿Quieres realizar otra acción? (S/N): ")
+        if continuar.lower() != 's':
+            cliente.finalizar_programa()
+            break
 
 inicio()
